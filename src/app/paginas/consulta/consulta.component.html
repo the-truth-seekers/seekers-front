@@ -1,7 +1,15 @@
 <div class="container">
-  <div class="search">
-    <input type="text" class="input-search"  required name="url" />
-    <button class="button-search" ><img src="/assets/img/lupa.svg" (click)="exec()"  alt="buscar"></button>
+  <form (ngSubmit)="onSubmit()" class="search">
+    <input type="text" class="input-search"  required [(ngModel)]="url" name="url"  id="url"/>
+    <button class="button-search" type="submit" ><img src="/assets/img/lupa.svg"   alt="buscar"></button>
     <span class="span-search">Url da noticia:</span>
+  </form>
+  <div *ngIf="resultadoBool != undefined">
+    <span>
+      Resultado: {{resultadoBool}}
+    </span>
+    <span>
+      Resultado: {{resultadoPorcentagem}}%
+    </span>
   </div>
 </div>
