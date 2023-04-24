@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+
+body{
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #fdfdfd;
+}
+
+.container {
+  width: 85%;
+  margin: 0 auto;
+}
+
+.ds-flex{
+  display: flex;
+}
+
+.ds-flex-space-between{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ds-flex-vert-center{
+  display: flex;
+  align-items: center;
+}
+
+.padding-t-b-4px{
+  padding: 4px 0 4px 0;
+}
+
+.margin-l-r-16px{
+  margin: 0 16px 0 16px;
+}
