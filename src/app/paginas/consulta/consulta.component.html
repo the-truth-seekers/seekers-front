@@ -1,15 +1,76 @@
 <div class="container">
-  <form (ngSubmit)="onSubmit()" class="search">
-    <input type="text" class="input-search"  required [(ngModel)]="url" name="url"  id="url"/>
-    <button class="button-search" type="submit" ><img src="/assets/img/lupa.svg"   alt="buscar"></button>
-    <span class="span-search">Url da noticia:</span>
-  </form>
-  <div *ngIf="resultadoBool != undefined">
-    <span>
-      Resultado: {{resultadoBool}}
-    </span>
-    <span>
-      Resultado: {{resultadoPorcentagem}}%
-    </span>
+  <H1 class="center">
+    Verifique a veracidade de notícias com nosso sistema confiável de
+    verificação</H1
+  >
+  <div class="ds-flex">
+    <div>
+      <p>
+        Verifique a veracidade de notícias utilizando o campo de busca abaixo.
+      </p>
+      <p>
+        Insira o link ou o texto da notícia e clique na 'lupa' para obter uma
+        análise completa e confiável sobre a veracidade da notícia. Nosso
+        sistema utiliza algoritmos e fontes confiáveis para analisar e avaliar
+        as informações contidas em uma notícia, determinando se ela é verdadeira
+        ou falsa.
+      </p>
+      <form (ngSubmit)="onSubmit()" class="search">
+        <input
+          type="text"
+          class="input-search"
+          required
+          [(ngModel)]="url"
+          name="url"
+          id="url"
+        />
+        <button class="button-search" type="submit">
+          <img src="/assets/img/lupa.svg" alt="buscar" />
+        </button>
+        <span class="span-search">Url da noticia:</span>
+      </form>
+      <div *ngIf="resultadoBool != undefined">
+        <span>
+          <h1>Resultado:</h1>
+          Após uma análise realizada por nosso sistema de verificação de fatos,
+          concluímos que a notícia em questão é
+          <b>{{ resultadoBool ? "verdadeira" : "falsa" }}</b
+          >. Nosso sistema utiliza uma variedade de fontes confiáveis e
+          algoritmos de detecção de padrões para identificar notícias falsas e
+          enganosas. Nós aconselhamos nossos leitores a serem cautelosos ao
+          compartilhar informações sem verificar sua veracidade. Se você tiver
+          dúvidas sobre uma notícia em particular, recomendamos que você
+          consulte fontes confiáveis antes de tomar uma decisão informada.
+        </span>
+      </div>
+      <div *ngIf="notFound == true">
+        <p>
+          Agradecemos por seu interesse em nossa equipe de verificação de fatos.
+          Infelizmente, ainda não tivemos a oportunidade de verificar a notícia
+          em questão, mas gostaríamos de informar que ela será adicionada à
+          nossa fila de verificação para ser analisada o mais breve possível.
+          Queremos esclarecer que nosso processo de verificação de fatos envolve
+          uma análise cuidadosa e detalhada de várias fontes confiáveis e pode
+          levar tempo para ser concluído. Pedimos desculpas pelo atraso e
+          encorajamos nossos leitores a verificar outras fontes confiáveis para
+          obter informações sobre o assunto. Estamos comprometidos em fornecer
+          informações precisas e confiáveis ​​para nossos leitores e
+          atualizaremos assim que tivermos mais informações.
+        </p>
+      </div>
+    </div>
+
+    <img src="/assets/img/lupaFakeNews.jpg" width="40%" alt="" />
   </div>
+  <p class="obs">
+    *Queremos informar aos nossos leitores que embora nosso sistema de verificação
+    de fatos seja altamente preciso, pode haver casos em que ele não consiga
+    identificar com precisão a veracidade de uma notícia. Reconhecemos que nosso
+    sistema automatizado pode ter limitações e pode haver casos em que a análise
+    possa ser imprecisa ou incompleta. Por essa razão, encorajamos nossos leitores
+    a verificar informações de outras fontes confiáveis antes de tomar uma decisão
+    informada. Estamos empenhados em fornecer informações precisas e confiáveis
+    ​​para nossos leitores e trabalhamos continuamente para melhorar nosso sistema
+    de verificação de fatos.
+  </p>
 </div>
