@@ -1,33 +1,9 @@
 name: Esteira de deploy do Seekers
-on:
-  workflow_dispatch:
-    branches: [main]
-    inputs:
-      aws_access_key_id:
-        description: AWS - Access Key
-        required: true
-      aws_secret_access_key:
-        description: AWS - Secret Access Key
-        required: true
-      aws_session_token:
-        description: AWS - Session Token
-        required: true
-      ec2_adress:
-        description: EC2 - Endereço da máquina
-        required: true
-      ec2_user:
-        description: EC2 - Usuário da máquina
-        required: true
+on: ["workflow_dispatch"]
 
 env:
   # GitHub envs
   REPOSITORY: ${{ github.repository_name }}
-  # AWS envs
-  AWS_ACCESS_KEY_ID: ${{ github.event.inputs.aws_access_key_id }}
-  AWS_SECRET_ACCESS_KEY: ${{ github.event.inputs.aws_secret_access_key }}
-  AWS_SESSION_TOKEN: ${{ github.event.inputs.aws_session_token }}
-  HOSTNAME: ${{ github.event.inputs.ec2_adress }}
-  USER: ${{ github.event.inputs.ec2_user }}
   # Docker envs
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
@@ -59,13 +35,3 @@ jobs:
         run: |
           docker push $DOCKER_USERNAME/$REPOSITORY:$GITHUB_SHA
           docker push $DOCKER_USERNAME/$REPOSITORY:latest
-
-      - name: Subindo aplicação na EC2
-        env:
-          PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
-        run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -O StrictHostKeyChecking=no  -i private_key ${USER_NAME}@${HOSTNAME} '
-            docker pull $DOCKER_USERNAME/$REPOSITORY:$GITHUB_SHA
-            docker run -d --rm --name seekers-front -p 9000:80 $DOCKER_USERNAME/$REPOSITORY:$GITHUB_SHA
-          '
