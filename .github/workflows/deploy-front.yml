@@ -3,13 +3,6 @@ on:
   push:
     branches: [ main ]
 
-env:
-  # GitHub envs
-  REPOSITORY: ${{ github.repository_name }}
-  # Docker envs
-  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-
 defaults:
   run:
     shell: bash
@@ -18,8 +11,7 @@ jobs:
   deploy-dev:
     runs-on: ubuntu-latest
     environment:
-      name: TI
-    #     needs: build
+      name: Production
     steps:
       - uses: actions/checkout@v2
 
@@ -31,7 +23,7 @@ jobs:
 
       - name: Build Docker image
         env:
-          REPOSITORY: ${{ github.action_repository }}
+          REPOSITORY: ${{ github.repository }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
@@ -39,7 +31,7 @@ jobs:
 
       - name: Push Docker image to Docker Hub
         env:
-          REPOSITORY: ${{ github.action_repository }}
+          REPOSITORY: ${{ github.repository }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
