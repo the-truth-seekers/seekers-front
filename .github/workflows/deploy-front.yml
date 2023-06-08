@@ -23,17 +23,19 @@ jobs:
 
       - name: Build Docker image
         env:
-          REPOSITORY: ${{ github.repository }}
+          GIT_REPOSITORY: ${{ github.repository }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
+          REPOSITORY=$(basename $GIT_REPOSITORY)
           docker build -t $DOCKER_USERNAME/$REPOSITORY:$GITHUB_SHA -t $DOCKER_USERNAME/$REPOSITORY:latest .
 
       - name: Push Docker image to Docker Hub
         env:
-          REPOSITORY: ${{ github.repository }}
+          GIT_REPOSITORY: ${{ github.repository }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
+          REPOSITORY=$(basename $GIT_REPOSITORY)
           docker push $DOCKER_USERNAME/$REPOSITORY:$GITHUB_SHA
           docker push $DOCKER_USERNAME/$REPOSITORY:latest
