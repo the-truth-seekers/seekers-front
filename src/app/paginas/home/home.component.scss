@@ -1,0 +1,17 @@
+.button {
+  background-color: #C4170C;
+  border: 2px #C4170C solid;
+  color: #f9f9f9;
+  font-weight: 600;
+  font-family: roboto;
+  border-radius: 5px;
+  position: relative;
+  padding: 10px;
+}
+.button:hover{
+  cursor: pointer;
+  background-color: rgb(202, 58, 48)
+}
+.button:active{
+  background-color: #af160b;
+}

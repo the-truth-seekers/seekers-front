@@ -1,6 +1,7 @@
 <div class="container" >
   <h1>O que é fake news?</h1>
   <div class="ds-flex">
+    <img src="/assets/img/news.jpg" class="img" alt="news" />
     <div>
       <p>
         Fake news é um termo que se refere a notícias falsas ou enganosas que são
@@ -22,9 +23,11 @@
         redes sociais. Além disso, é fundamental ter um senso crítico e estar
         sempre disposto a questionar o que lemos, ouvimos ou vemos na mídia.
       </p>
-      <button routerLink="/consulta">Consultar noticia</button>
-    </div>
+      <div class="ds-flex-space-around">
+        <button class="button" routerLink="/consulta">Consultar noticia por link</button>
+        <button class="button" routerLink="/consultar-texto">Consultar noticia por texto</button>
+      </div>
 
-    <img src="/assets/img/news.jpg" width="60%" alt="news" />
+    </div>
   </div>
 </div>

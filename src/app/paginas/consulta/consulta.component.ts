@@ -48,7 +48,7 @@ export class ConsultaComponent {
   consulta(): Observable<{ data: { resultado: boolean }[] }> {
     const params = new HttpParams({ fromString: 'url=' + this.url });
     return this.httpClient
-      .get<{ data: any }>('http://localhost:8000/api/noticias/consultar', { params })
+      .get<{ data: any }>('/api/noticias/consultar', { params })
       .pipe(
         map((response) => response)
       );

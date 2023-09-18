@@ -9,6 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './paginas/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ConsultaTextoComponent } from './paginas/consulta-texto/consulta-texto.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
     ConsultaComponent,
     HeaderComponent,
     HomeComponent,
+    ConsultaTextoComponent,
   ],
   imports: [
     BrowserModule,
