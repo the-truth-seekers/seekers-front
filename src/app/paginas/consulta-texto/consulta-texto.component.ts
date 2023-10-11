@@ -12,7 +12,6 @@ export class ConsultaTextoComponent implements OnInit {
 
   text?: string;
   resultadoBool: boolean | undefined;
-  notFound: boolean = false;
 
   constructor(private httpClient: HttpClient) {}
   ngOnInit(): void {
@@ -23,13 +22,7 @@ export class ConsultaTextoComponent implements OnInit {
     if(this.text){
       this.consulta().subscribe({
         next: (resu) => {
-          if (resu.data.length === 0) {
-            this.notFound = true;
-            this.resultadoBool = undefined;
-          } else {
-            this.resultadoBool = resu.data[0].resultado;
-            this.notFound = false;
-          }
+          this.resultadoBool = resu.resposta_analisada;
         },
         error(err: Error) {
           alert(err.message)
@@ -49,10 +42,10 @@ export class ConsultaTextoComponent implements OnInit {
       .then(result => console.log(result))
       .catch(error => console.log('error', error)); */
   }
-  consulta(): Observable<{ data: { resultado: boolean }[] }> {
+  consulta(): Observable<{'resultado': string, 'resposta_analisada': boolean, 'probabilidades': string}> {
     const params = new HttpParams();
     return this.httpClient
-      .post<{ data: any }>('/api/predicao/', {"texto": this.text}, {params})
+      .post<{'resultado': string, 'resposta_analisada': boolean, 'probabilidades': string}>('/api/predicao/', {"texto": this.text}, {params})
       .pipe(map((response) => response));
   }
 }
