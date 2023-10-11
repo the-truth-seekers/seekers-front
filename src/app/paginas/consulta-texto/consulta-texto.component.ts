@@ -10,7 +10,7 @@ import { Observable, map } from 'rxjs';
 export class ConsultaTextoComponent implements OnInit {
   @Output() aoTransferir = new EventEmitter<any>();
 
-  url2?: string;
+  text?: string;
   resultadoBool: boolean | undefined;
   notFound: boolean = false;
 
@@ -20,7 +20,7 @@ export class ConsultaTextoComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if(this.url2){
+    if(this.text){
       this.consulta().subscribe({
         next: (resu) => {
           if (resu.data.length === 0) {
@@ -50,9 +50,9 @@ export class ConsultaTextoComponent implements OnInit {
       .catch(error => console.log('error', error)); */
   }
   consulta(): Observable<{ data: { resultado: boolean }[] }> {
-    const params = new HttpParams({ fromString: 'url=' + this.url2 });
+    const params = new HttpParams();
     return this.httpClient
-      .get<{ data: any }>('/api/noticias/consultar', {params})
+      .post<{ data: any }>('/api/predicao/', {"texto": this.text}, {params})
       .pipe(map((response) => response));
   }
 }

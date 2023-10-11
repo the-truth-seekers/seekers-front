@@ -24,16 +24,21 @@ export class ConsultaComponent {
   constructor(private httpClient: HttpClient) {}
 
   onSubmit(): void {
-    console.log('aa');
-    this.consulta().subscribe({ next: resu => {
-      if(resu.data.length === 0){
-        this.notFound = true
-        this.resultadoBool = undefined
-      }else{
-        this.resultadoBool = resu.data[0].resultado
-        this.notFound = false
-      }
-    } });
+    if (this.url) {
+      this.consulta().subscribe({
+        next: (resu) => {
+          if (resu.data.length === 0) {
+            this.notFound = true;
+            this.resultadoBool = undefined;
+          } else {
+            this.resultadoBool = resu.data[0].resultado;
+            this.notFound = false;
+          }
+        },
+      });
+    } else {
+      alert('preencher campo de texto');
+    }
 
     /* var requestOptions = {
       method: 'GET',
@@ -49,8 +54,6 @@ export class ConsultaComponent {
     const params = new HttpParams({ fromString: 'url=' + this.url });
     return this.httpClient
       .get<{ data: any }>('/api/noticias/consultar', { params })
-      .pipe(
-        map((response) => response)
-      );
+      .pipe(map((response) => response));
   }
 }
