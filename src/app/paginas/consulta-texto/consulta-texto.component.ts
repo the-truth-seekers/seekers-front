@@ -12,6 +12,7 @@ export class ConsultaTextoComponent implements OnInit {
 
   text?: string;
   resultadoBool: boolean | undefined;
+  inconclusivo: boolean = false;
 
   constructor(private httpClient: HttpClient) {}
   ngOnInit(): void {
@@ -23,6 +24,7 @@ export class ConsultaTextoComponent implements OnInit {
       this.consulta().subscribe({
         next: (resu) => {
           this.resultadoBool = resu.resposta_analisada;
+          this.inconclusivo = this.resultadoBool === undefined;
         },
         error(err: Error) {
           alert(err.message)
